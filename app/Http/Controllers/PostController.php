@@ -1,4 +1,4 @@
-<?php
+<?php //parte guest
 
 namespace App\Http\Controllers;
 
@@ -11,5 +11,12 @@ class PostController extends Controller
     {   
         $posts = Post::all();
         return view("guest.posts.index", compact("posts"));
+    }
+
+    public function show($slug)
+    {
+        $post = Post::where("slug", $slug)->first();
+
+        return view("guest.posts.show", compact("post"));
     }
 }
