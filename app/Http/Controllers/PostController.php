@@ -17,6 +17,11 @@ class PostController extends Controller
     {
         $post = Post::where("slug", $slug)->first();
 
+        //condizione post vuoto o inesistente
+        if(!$post) {
+            abort("404"); //cosi non mi stampa errore laravel con codice
+        }
+
         return view("guest.posts.show", compact("post"));
     }
 }
