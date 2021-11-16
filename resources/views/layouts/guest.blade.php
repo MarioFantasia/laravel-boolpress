@@ -61,7 +61,10 @@
                     </div> --}}
                     <div class="d-flex justify-content-between">
                         <a class="blog-header-logo text-dark" href="#">BOOLPRESS</a>
-                        <a class="btn btn-outline-secondary" href="{{route("login")}}">Sign up</a>
+                    <div class="div">
+                        <a class="btn btn-outline-secondary" href="{{route("register")}}">Sign up</a>
+                        <a class="btn btn-outline-secondary" href="{{route("login")}}">Sign in</a>
+                    </div>
                     </div>
                 </div>
             </header>
