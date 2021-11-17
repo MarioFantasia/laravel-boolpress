@@ -35,6 +35,7 @@
                     <ul class="navbar-nav mr-auto">
                         <li><a class="nav-link" href="{{route("admin.posts.index")}}">Tutti i posts</a></li>
                         <li><a class="nav-link" href="{{route("admin.posts.create")}}">Nuovo post</a></li>
+                        <li><a class="nav-link" href="{{route("admin.categories.index")}}">Tutte le categorie</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
