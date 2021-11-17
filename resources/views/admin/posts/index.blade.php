@@ -31,7 +31,11 @@
                                         <button type="button" class="btn btn-success">Modifica</button>
                                     </a>
                                     <a href="">
-                                        <button type="button" class="btn btn-danger">Elimina</button>
+                                        <form action="{{route("admin.posts.destroy", $post["id"])}}" method="POST">
+                                            @csrf
+                                            @method("DELETE")
+                                            <button type="submit" class="btn btn-danger">Elimina</button>
+                                        </form>
                                     </a>
                                 </td>
                             </tr>
