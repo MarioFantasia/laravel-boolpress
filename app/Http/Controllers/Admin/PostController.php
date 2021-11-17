@@ -49,6 +49,18 @@ class PostController extends Controller
         $newPost ->fill($request->all());
         $slug = Str::of($request->title)->slug("-");
 
+        //per l-improbabile caso che ci sia un titolo ripetuto
+        $postExist = Post::where("slug", $slug)->first();
+
+        $cont = 2;
+            
+        while($postExist) {
+            $slug = Str::of($request->title)->slug("-");
+            $postExist = Post::where("slug", $slug)->first();
+            $cont++;
+                
+        }
+
         $newPost->slug = $slug;
 
         $newPost->save();
@@ -73,9 +85,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        return view("admin.posts.edit", compact("post"));
     }
 
     /**
@@ -85,9 +97,35 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $request->validate([
+            "title" => "string|required|max:100",
+            "content" => "string|required"
+        ]);
+
+        if($post->title != $request->title){
+            $slug = Str::of($request->title)->slug("-");
+            
+            //per l-improbabile caso che ci sia un titolo ripetuto
+            $postExist = Post::where("slug", $slug)->first();
+            
+            $cont = 2;
+            
+            while($postExist) {
+                $slug = Str::of($request->title)->slug("-");
+                $postExist = Post::where("slug", $slug)->first();
+                $cont++;
+                
+            }
+            
+            $post->slug = $slug;
+        }
+        
+        $post->fill($request->all());
+        $post->save();
+
+        return redirect()->route("admin.posts.show", $post->id);
     }
 
     /**

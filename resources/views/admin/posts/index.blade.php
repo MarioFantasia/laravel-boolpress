@@ -27,7 +27,7 @@
                                     <a href="{{route("admin.posts.show", $post["id"])}}">
                                         <button type="button" class="btn btn-primary">Visualizza</button>
                                     </a>
-                                    <a href="">
+                                    <a href="{{route("admin.posts.edit", $post["id"])}}">
                                         <button type="button" class="btn btn-success">Modifica</button>
                                     </a>
                                     <a href="">
