@@ -26,8 +26,9 @@ class AddColumnCategoryIdPostTable extends Migration
     public function down()
     {
         Schema::table('posts', function(Blueprint $table) {
-            $table->dropForeign('category_id');
+            $table->dropForeign(['category_id']); //per leggere il rollback lo passo come array
             $table->dropColumn('category_id');
+            // il dorp prima toglie il vincolo e poi toglie la tabella
         });
     }
 }
