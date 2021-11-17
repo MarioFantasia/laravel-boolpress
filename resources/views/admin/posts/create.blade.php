@@ -28,6 +28,16 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
 
+                        <div class="form-group">
+                            <label for="catetgory">Inserisci la categoria del post</label>
+                            <select name="category_id" class="form-control">
+                                <option value="">-Seleziona la categoria-</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{$category["id"]}}">{{ucfirst($category["name"])}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         <button type="submit" class="btn btn-primary">Pubblica post</button>
                         </form>
                 </div>
