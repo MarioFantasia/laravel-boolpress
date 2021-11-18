@@ -67,9 +67,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view("admin.categories.edit", compact("category"));
+
     }
 
     /**
@@ -79,9 +80,34 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            "name" => "string|required|max:20|unique:categories,name",
+        ]);
+
+        if($category->name != $request->name){
+            $slug = Str::of($request->name)->slug("-");
+            
+            //per l-improbabile caso che ci sia un titolo ripetuto. da rivedere. anche per post
+            $categoryExist =Category::where("slug", $slug)->first();
+            
+            $cont = 2;
+            
+            while($categoryExist) {
+                $slug = Str::of($request->name)->slug("-");
+                $categoryExist =Category::where("slug", $slug)->first();
+                $cont++;
+                
+            }
+            
+            $category->slug = $slug;
+        }
+        
+        $category->fill($request->all());
+        $category->save();
+
+        return redirect()->route("admin.categories.show", $category->id);
     }
 
     /**
