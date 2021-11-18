@@ -42,14 +42,13 @@
                             <label for="">Seleziona i tags</label>
                             @foreach ($tags as $tag)
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" name="" id="{{$tag["id"]}}" class="custom-control-input">
-                                    <label for="{{$tag["id"]}}" class="custom-control-label">{{$tag["name"]}}</label>
+                                    <input type="checkbox" name="tags[]" value="{{$tag["id"]}}" id="tag-{{$tag["id"]}}" class="custom-control-input"> {{-- name="tags[]" vale solo con le checkbox --}}
+                                    <label for="tag-{{$tag["id"]}}" class="custom-control-label">{{$tag["name"]}}</label>
                                 </div>
                             @endforeach
                         </div>
 
                         <button type="submit" class="btn btn-primary">Pubblica post</button>
-                    </form>
                 </div>
             </div>
         </div>

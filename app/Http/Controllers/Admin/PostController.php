@@ -47,7 +47,8 @@ class PostController extends Controller
     {
         $request->validate([
             "title" => "string|required|max:100",
-            "content" => "string|required"
+            "content" => "string|required",
+            "tags" => "exists:tags,id"  //verifica se esistono i tags nella tabella
         ]);
 
         $newPost = new Post();
@@ -69,6 +70,8 @@ class PostController extends Controller
         $newPost->slug = $slug;
 
         $newPost->save();
+
+        $newPost->tags()->attach($request->tags);
 
         return redirect()->route("admin.posts.index")->with("success", "Il post è stato pubblicato");
     }
