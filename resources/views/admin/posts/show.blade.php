@@ -9,8 +9,16 @@
 
                 <div class="card-body">
                     <h1>Titolo: {{$post["title"]}}</h1>
-                    <p>{{$post["content"]}}</p>
+                    @if ($post["tags"])
+                        <ul style="list-style: none">
+                            <li><h4>Tag: </h4></li>
+                            @foreach ($post["tags"] as $tag)
+                                <li>{{$tag["name"]}} </li>
+                            @endforeach
+                        </ul>
+                    @endif
                     <div>Data: {{$post["created_at"]}}</div>
+                    <p>{{$post["content"]}}</p>
                 </div>
             </div>
         </div>
