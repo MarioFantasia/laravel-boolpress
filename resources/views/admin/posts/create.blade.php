@@ -22,11 +22,11 @@
                         <div class="form-group">
                             <label for="content">Contenuto del post</label>
                             <textarea name="content" class="form-control @error('title') is-invalid @enderror" id="content" placeholder="Inserisci il contenuto del post" rows="5" cols="50"></textarea>
+                            {{-- errore validazione --}}
+                            @error('content')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
-                        {{-- errore validazione --}}
-                        @error('content')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
 
                         <div class="form-group">
                             <label for="catetgory">Inserisci la categoria del post</label>
@@ -39,7 +39,7 @@
                         </div>
 
                         <button type="submit" class="btn btn-primary">Pubblica post</button>
-                        </form>
+                    </form>
                 </div>
             </div>
         </div>
