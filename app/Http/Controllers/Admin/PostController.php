@@ -94,8 +94,11 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Post $post)
-    {
-        return view("admin.posts.edit", compact("post"));
+    {   
+        $categories = Category::all();
+        $tags = Tag::all();
+
+        return view("admin.posts.edit", compact("post", "categories", "tags"));
     }
 
     /**
@@ -132,6 +135,8 @@ class PostController extends Controller
         
         $post->fill($request->all());
         $post->save();
+
+        $post->tags()->sync($request->tags);
 
         return redirect()->route("admin.posts.show", $post->id);
     }
