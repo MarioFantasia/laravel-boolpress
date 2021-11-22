@@ -10,4 +10,9 @@ class PageController extends Controller
     {
         return view("guest.welcome");
     }
+
+    public function apiPost()
+    {
+        return view("guest.api");
+    }
 }
