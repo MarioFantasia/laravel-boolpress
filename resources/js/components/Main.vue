@@ -1,6 +1,11 @@
 <template>
     <main>
-        <h2>MAIN</h2>
+        <h2>Titoli posts</h2>
+        <ul>
+            <li v-for="post in posts" :key="post.id">
+                {{ post.title }}
+            </li>
+        </ul>
     </main>
 </template>
 
@@ -8,12 +13,22 @@
 
     export default {
         name: "Main",
+
+        data() {
+            return {
+                posts:[]
+            }
+        },
+
         mounted() {
             axios.get("/api/posts")
-            .then(function(response) {
+
+            .then((response) => {
+                this.posts = response.data.data;
                 console.log(response);
             })
-            .catch(function(error) {
+
+            .catch((error) => {
                 console.log(error);
             })
         }
